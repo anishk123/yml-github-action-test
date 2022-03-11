@@ -7,7 +7,7 @@ on:
       
 jobs:
   check_for_comment_in_CE_yml_files:
-    name: Check for comment in Content Engineering owned YML files
+    name: Comment in Content owned YML files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,7 +24,7 @@ jobs:
             owner_in_yml=$(sed -n 's/.*owner:[ \t]*//p' $changed_ymls)
             if [[ "$owner_in_yml" = "content-understanding" || "$owner_in_yml" = "publisher-content-mgmt" || "$owner_in_yml" = "content-operations" ]]; then
               if [[ -z $(sed -n 's/.*comment:[ \t]*//p' $changed_ymls) ]]; then
-                echo "Add atleast one comment in all modified Content Engineering YML metadata files."
+                echo "Add atleast one comment in all modified Content team's owned YML metadata files."
                 exit 1
               fi
             fi
