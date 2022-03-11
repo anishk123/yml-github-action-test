@@ -1,0 +1,29 @@
+name: PR to master
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - main
+      
+jobs:
+  check_for_comment_in_CE_yml_files:
+    name: Check for comment in Content Engineering owned YML files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run check
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          for changed_ymls in $(git diff --name-only --diff-filter=ACMRT $PR_BASE_SHA $COMMIT_SHA | grep .yml$)
+          do
+            owner_in_yml=$(sed -n 's/.*owner:[ \t]*//p' $changed_ymls)
+            if [[ "$owner_in_yml" = "content-understanding" || "$owner_in_yml" = "publisher-content-mgmt" || "$owner_in_yml" = "content-operations" ]]; then
+              if [[ -z $(sed -n 's/.*comment:[ \t]*//p' $changed_ymls) ]]; then
+                echo "Add atleast one comment in all modified Content Engineering YML metadata files."
+                exit 1
+              fi
+            fi
+          done
