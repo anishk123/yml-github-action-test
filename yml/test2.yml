@@ -1,6 +1,6 @@
 table_name: 2
 fields:
-  test1: {type: integer}
+  test1: {type: integer, comment: something}
   test2: {type: byte}
 partition_columns: [ds]
 sort_columns: []
