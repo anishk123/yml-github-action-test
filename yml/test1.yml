@@ -1,8 +1,8 @@
 table_name: 1
 fields:
-  test1: {type: integer, comment: yes}
-  test2: {type: byte, comment: no}
+  test1: {type: integer}
+  test2: {type: string}
 partition_columns: [ds]
 sort_columns: []
 sensitivity_category: GENERAL
-owner: content-operations
+owner: bnmg
