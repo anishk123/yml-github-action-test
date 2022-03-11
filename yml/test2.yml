@@ -1,0 +1,8 @@
+table_name: 2
+fields:
+  test1: {type: integer}
+  test2: {type: byte}
+partition_columns: [ds]
+sort_columns: []
+sensitivity_category: GENERAL
+owner: asdf
