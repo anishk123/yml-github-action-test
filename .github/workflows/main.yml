@@ -7,7 +7,7 @@ on:
       
 jobs:
   check_for_comment_in_CE_yml_files:
-    name: Comment in Content owned YML files
+    name: Comment check in Content owned YML files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
