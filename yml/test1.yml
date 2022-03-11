@@ -5,4 +5,4 @@ fields:
 partition_columns: [ds]
 sort_columns: []
 sensitivity_category: GENERAL
-owner: none
+owner: content-operations
